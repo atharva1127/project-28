@@ -3,12 +3,12 @@ class SlingShot{
         var options={
             bodyA:bodyA,
             pointB:pointB,
-            stiffness:1,
+            stiffness:0.01,
             length:0
         }
         this.pointB=pointB;
         this.sling=Constraint.create(options);
-        World.add(workd,this.sling);
+        World.add(world,this.sling);
     }
 
     fly(){
@@ -18,7 +18,7 @@ class SlingShot{
         if(this.sling.bodyA){
             var pointA =this.sling.bodyA.position;
             var pointB=this.pointB;
-            stroleWeight(4);
+            strokeWeight(6);
             line(pointA.x,pointA.y,pointB.x,pointB.y);
         }
     }
