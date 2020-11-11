@@ -12,7 +12,8 @@ var boy,stone;
 var sling;
 
 function preload(){
-	boy=loadImage("Images/boy.png")
+	boy=loadImage("Images/boy.png");
+	tree=loadImage("Images/tree.png")
 
 }
 
@@ -25,7 +26,6 @@ function setup() {
 
 	//Create the Bodies Here.
 	ground = new Ground(600,height,1200,20);
-	tree=new Tree(950,400);
 	mango1=new Mango(950,300,70);
 	mango2=new Mango(1000,370,70);
 	mango3=new Mango(800,290,70);
@@ -33,7 +33,7 @@ function setup() {
 	mango5=new Mango(1150,300,70);
 	mango6=new Mango(750,350,70);
 	mango7=new Mango(950,200,70);
-	stone=new Stone(220,550,50,50);
+	stone=new Stone(220,550,50);
 	sling=new SlingShot(stone.body,{x:220,y:550});
 
 	Engine.run(engine);
@@ -46,9 +46,8 @@ function draw() {
   background(225);
   imageMode(CENTER);
   image(boy,300,620,250,300);
+  image(tree,900,410,600,600);
   Engine.update(engine);
-  ground.display();
-  tree.display();
   mango1.display();
   mango2.display();
   mango3.display();
@@ -57,17 +56,16 @@ function draw() {
   mango6.display();
   mango7.display();
   stone.display();
+  ground.display();
   sling.display();
 
   detectollision(stone,mango1);
-  detectollision(stone,mango2);
-  detectollision(stone,mango3);
-  detectollision(stone,mango4);
-  detectollision(stone,mango5);
-  detectollision(stone,mango6);
-  detectollision(stone,mango7);
-
-  drawSprites()
+//   detectollision(stone,mango2);
+//   detectollision(stone,mango3);
+//   detectollision(stone,mango4);
+//   detectollision(stone,mango5);
+//   detectollision(stone,mango6);
+//   detectollision(stone,mango7);
  
 }
 
@@ -80,11 +78,14 @@ function mouseReleased(){
 }
 
 function detectollision(lstone,lmango){
-	 mangoBodyPosition=lmango.Body.position
-	 stoneBodyPosition=lstone.Body.position
+	console.log(lmango);
+	console.log(lstone);
+	console.log("inside function");
+	 mangoBodyPosition=lmango.body.position
+	 stoneBodyPosition=lstone.body.position
 	var distance=dist(stoneBodyPosition.x,stoneBodyPosition.y,mangoBodyPosition.x,mangoBodyPosition.y);
 
-	if(distance<=lmango.width,lmango.height){
+	if(distance<=lstone.r+lmango.r){
 		Matter.Body.setStatic(lmango.body,false);
 
 	}
